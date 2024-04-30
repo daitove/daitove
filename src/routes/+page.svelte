@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Icon } from '$lib/components';
+  import Flag from '$lib/components/Flag.svelte';
   import bgImage from '$lib/images/coming-soon-bg.jpg';
 </script>
 
@@ -11,7 +11,7 @@
   >
     <a class="text-[#f00]" href="/">
       <span class="sr-only">Daitove.ge</span>
-      <Icon name="ge_flag" class="w-auto h-10 sm:h-12" />
+      <Flag class="w-auto h-10 sm:h-12" />
     </a>
   </header>
 
