@@ -21,6 +21,7 @@
         size: 'normal'
       });
     }
+    await window.recaptchaVerifier.verify();
     confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier);
     window.recaptchaVerifier.clear();
   }

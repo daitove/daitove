@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, RecaptchaVerifier } from 'firebase/auth';
 import type { ConfirmationResult } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore/lite';
-// import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check';
+import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check';
 
 console.log('hello from firebase!');
 
@@ -17,10 +17,10 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-// initializeAppCheck(app, {
-//   provider: new ReCaptchaV3Provider('6LeXKs0pAAAAADK3nU17YIn06S12f3SFqWul-w6X'),
-//   isTokenAutoRefreshEnabled: true
-// });
+initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider('6LeXKs0pAAAAADK3nU17YIn06S12f3SFqWul-w6X'),
+  isTokenAutoRefreshEnabled: true
+});
 
 const auth = getAuth(app);
 auth.languageCode = 'ka';
