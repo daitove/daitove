@@ -51,6 +51,9 @@ importers:
       eslint-plugin-svelte:
         specifier: ^2.35.1
         version: 2.38.0(eslint@8.57.0)(svelte@4.2.15)
+      husky:
+        specifier: ^9.0.11
+        version: 9.0.11
       postcss:
         specifier: ^8.4.38
         version: 8.4.38
@@ -1099,6 +1102,11 @@ packages:
 
   http-parser-js@0.5.8:
     resolution: {integrity: sha512-SGeBX54F94Wgu5RH3X5jsDtf4eHyRogWX1XGT3b4HuW3tQPM4AaBzoUji/4AAJNXCEOWZ5O0DgZmJw1947gD5Q==}
+
+  husky@9.0.11:
+    resolution: {integrity: sha512-AB6lFlbwwyIqMdHYhwPe+kjOC3Oc5P3nThEoW/AaO2BX3vJDjWPFxYLxokUZOo6RNX20He3AaT8sESs9NJcmEw==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   idb@7.1.1:
     resolution: {integrity: sha512-gchesWBzyvGHRO9W8tzUWFDycow5gwjvFKfyV9FF32Y7F50yZMp7mP+T2mJIWFx49zicqyC4uefHM17o6xKIVQ==}
@@ -2957,6 +2965,8 @@ snapshots:
       function-bind: 1.1.2
 
   http-parser-js@0.5.8: {}
+
+  husky@9.0.11: {}
 
   idb@7.1.1: {}
 
