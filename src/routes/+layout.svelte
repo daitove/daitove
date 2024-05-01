@@ -43,6 +43,7 @@
       </li>
     {/each}
   </ul>
-
-  <slot />
+  <div class="mx-10 pb-16">
+    <slot />
+  </div>
 </div>
