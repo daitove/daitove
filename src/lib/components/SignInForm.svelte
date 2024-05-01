@@ -22,7 +22,7 @@
       });
     }
     confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier);
-    // window.recaptchaVerifier.clear();
+    window.recaptchaVerifier.clear();
   }
 
   async function confirmVerificationCode() {
