@@ -7,35 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.12.2
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Lint
-        run: pnpm run lint
-
-      - name: Check
-        run: pnpm run check
-
-      - name: Build
-        run: pnpm run build
-
-      - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: build/
+    uses: ./.github/workflows/build.yml
 
   deploy:
     needs: build
@@ -51,5 +23,4 @@ jobs:
 
     steps:
       - name: Deploy
-        id: deployment
         uses: actions/deploy-pages@v4
