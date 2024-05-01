@@ -1,13 +1,16 @@
 name: Build SPA
 
+
 on:
   workflow_call:
 
   pull_request:
     branches:
       - master
+
     paths-ignore:
       - 'README.md'
+
 
 jobs:
   build:
