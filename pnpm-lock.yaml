@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@firebase/app-check':
+        specifier: ^0.8.3
+        version: 0.8.3(@firebase/app@0.10.2)
       '@firebase/auth':
         specifier: ^1.7.2
         version: 1.7.2(@firebase/app@0.10.2)

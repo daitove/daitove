@@ -1,6 +1,10 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+import { getAuth, RecaptchaVerifier } from 'firebase/auth';
+import type { ConfirmationResult } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore/lite';
+import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check';
+
+console.log('hello from firebase!');
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBqiSXRNA-poTmiNgAfHxHVtEwqeH0-0ao',
@@ -12,7 +16,27 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
+initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider('6LeXKs0pAAAAADK3nU17YIn06S12f3SFqWul-w6X'),
+  isTokenAutoRefreshEnabled: true
+});
+
 const auth = getAuth(app);
+auth.languageCode = 'ka';
+
+declare global {
+  interface Window {
+    recaptchaVerifier: RecaptchaVerifier;
+    confirmationResult: ConfirmationResult;
+  }
+}
+
 const firestore = getFirestore(app);
 
-export { app, auth, firestore };
+const mockUser = {
+  phoneNumber: '+995555555555',
+  verificationCode: '555555'
+};
+
+export { app, auth, firestore, mockUser };
