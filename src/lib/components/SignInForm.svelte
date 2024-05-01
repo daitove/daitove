@@ -10,30 +10,29 @@
 
   export let showSignInForm: boolean;
 
-  let dialog: HTMLDialogElement;
   let fullName: string;
   let phoneNumber: string;
   let verificationCode: string;
   let confirmationResult: ConfirmationResult | undefined = undefined;
 
-  $: if (dialog && showSignInForm) dialog.showModal();
-
   async function sendVerificationCode() {
-    window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-      size: 'invisible'
-    });
+    if (window.recaptchaVerifier === undefined) {
+      window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+        size: 'normal'
+      });
+    }
     confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier);
+    // window.recaptchaVerifier.clear();
   }
 
   async function confirmVerificationCode() {
     await confirmationResult!.confirm(verificationCode);
     await updateProfile(auth.currentUser!, { displayName: fullName });
-    dialog?.close();
     showSignInForm = false;
   }
 </script>
 
-<dialog bind:this={dialog}>
+{#if showSignInForm}
   {#if confirmationResult === undefined}
     <form>
       <input id="full-name" type="text" placeholder="სახელი და გვარი" bind:value={fullName} />
@@ -57,4 +56,4 @@
       <button id="confirm-verification-code" on:click={confirmVerificationCode}>დასრულება</button>
     </form>
   {/if}
-</dialog>
+{/if}
