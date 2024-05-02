@@ -1,1 +1,2 @@
-pnpm run check
+pnpm lint
+pnpm check
