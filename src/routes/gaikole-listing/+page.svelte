@@ -18,16 +18,51 @@
   import { firestore } from '$lib/firebase';
   import GaikoleCardShort from '$lib/components/GaikoleCardShort.svelte';
   import GaikoleFormShort from '$lib/components/GaikoleFormShort.svelte';
+  import DaitoveCard from '$lib/components/DaitoveCard.svelte';
+  import DaitoveForm from '$lib/components/DaitoveForm.svelte';
 
   let category: 'daitove' | 'gaikole' = 'daitove';
+  let showDaitoveForm = false;
   let showGaikoleForm = false;
 
+  let daitoveList: Daitove[] = [];
   let gaikoleList: Gaikole[] = [];
+  let lastDaitoveDoc: QueryDocumentSnapshot<DocumentData, DocumentData> | undefined = undefined;
   let lastGaikoleDoc: QueryDocumentSnapshot<DocumentData, DocumentData> | undefined = undefined;
 
-  onMount(() => fetchGaikole());
+  onMount(async () => {
+    await fetchDaitove();
+    await fetchGaikole();
+  });
+
+  async function fetchDaitove() {
+    console.log('fetching daitove');
+    const snapshot = await getDocs(
+      query(
+        collection(firestore, 'daitove'),
+        where('tillDate', '>', Timestamp.now()),
+        orderBy('fromDate'),
+        ...(lastDaitoveDoc ? [startAfter(lastDaitoveDoc)] : []),
+        limit(32)
+      )
+    );
+    lastDaitoveDoc = snapshot.docs[snapshot.docs.length - 1];
+    snapshot.forEach((doc) => {
+      const data = doc.data();
+      daitoveList.push({
+        numberOfPeople: data.numberOfPeople as number,
+        fromDate: data.fromDate.toDate() as Date,
+        tillDate: data.tillDate.toDate() as Date,
+        district: data.district as string,
+        foodIncluded: data.foodIncluded as boolean,
+        phoneNumber: data.phoneNumber as string
+      });
+    });
+    daitoveList = daitoveList;
+  }
 
   async function fetchGaikole() {
+    console.log('fetching gaikole');
     const snapshot = await getDocs(
       query(
         collection(firestore, 'gaikole'),
@@ -65,12 +100,21 @@
     .subscribe((isNearBottom) => {
       if (isNearBottom) {
         if (category === 'daitove') {
-          console.log('TODO');
+          fetchDaitove();
         } else if (category === 'gaikole') {
           fetchGaikole();
         }
       }
     });
+
+  interface Daitove {
+    numberOfPeople: number;
+    fromDate: Date;
+    tillDate: Date;
+    district: string;
+    foodIncluded: boolean;
+    phoneNumber: string;
+  }
 
   interface Gaikole {
     departurePoint: string;
@@ -90,7 +134,23 @@
 <p>{category}</p>
 
 {#if category === 'daitove'}
-  <ul><li>დატიე</li></ul>
+  <ul>
+    {#each daitoveList as daitove}
+      <li>
+        <DaitoveCard
+          numberOfPeople={daitove.numberOfPeople}
+          fromDate={daitove.fromDate}
+          tillDate={daitove.tillDate}
+          district={daitove.district}
+          foodIncluded={daitove.foodIncluded}
+          phoneNumber={daitove.phoneNumber}
+        />
+      </li>
+    {/each}
+  </ul>
+
+  <DaitoveForm bind:showDaitoveForm />
+  <button on:click={() => (showDaitoveForm = true)}>დაიტოვე!</button>
 {:else if category === 'gaikole'}
   <ul>
     {#each gaikoleList as gaikole}

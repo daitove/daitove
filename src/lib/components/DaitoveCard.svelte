@@ -3,15 +3,17 @@
   import checkIcon from '$lib/images/check-icon.svg';
   import phoneIcon from '$lib/images/phone-icon.svg';
   import copyIcon from '$lib/images/copy-icon.svg';
+
   // const imageUrl: string =
   //   $$props.imageUrl ||
   //   'https://www.pngkey.com/png/full/233-2332677_image-500580-placeholder-transparent.png';
   // const imageDescription: string = $$props.imageDescription || 'ოთახის ფოტო';
-  const district: string = $$props.district || 'თავისუფლება';
-  const address: string = $$props.address || 'რუსთაველის გამზირი 8';
-  const fromDate: Date = $$props.fromDate || new Date();
-  const tillDate: Date = $$props.tillDate || new Date();
-  const numberOfPeople: number = $$props.numberOfPeople || 1;
+  const district: string = $$props.district;
+  const address: string = $$props.address;
+  const fromDate: Date = $$props.fromDate;
+  const tillDate: Date = $$props.tillDate;
+  const numberOfPeople: number = $$props.numberOfPeople;
+
   const duration: number = Math.floor(
     (tillDate.getTime() - fromDate.getTime()) / (24 * 60 * 60 * 1000)
   );

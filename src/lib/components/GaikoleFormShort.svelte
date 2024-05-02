@@ -8,18 +8,19 @@
 
   export let showGaikoleForm: boolean;
 
-  let user: User | null = null;
   let departurePoint: string = '';
   let numberOfPeople: string = '';
   let departureTime: string = '';
+
+  let user: User | null = null;
 
   onAuthStateChanged(auth, (usr) => (user = usr));
 
   async function publish() {
     addDoc(collection(firestore, 'gaikole'), {
-      authorUid: auth.currentUser!.uid,
-      authorName: auth.currentUser!.displayName?.split(' ')[0],
-      phoneNumber: auth.currentUser!.phoneNumber,
+      authorUid: user!.uid,
+      authorName: user!.displayName?.split(' ')[0],
+      phoneNumber: user!.phoneNumber,
       departurePoint: departurePoint.trim(),
       numberOfPeople: parseInt(numberOfPeople),
       departureTime: Timestamp.fromDate(new Date(departureTime))
