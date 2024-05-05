@@ -7,8 +7,10 @@ on:
     branches:
       - master
     paths-ignore:
-      - README.md
       - .gitignore
+      - CONTRIBUTING.md
+      - README.md
+      - TODO
 
 jobs:
   build:
@@ -38,6 +40,7 @@ jobs:
         run: pnpm build
 
       - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          path: build/
+          name: build
+          path: build

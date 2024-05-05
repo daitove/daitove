@@ -1,0 +1,308 @@
+{
+  "აფხაზეთი": [
+    {
+      "name": "გაგრა",
+      "population": 12000
+    },
+    {
+      "name": "გალი",
+      "population": 7200
+    },
+    {
+      "name": "სოხუმი",
+      "population": 65500
+    }
+  ],
+  "აჭარა": [
+    {
+      "name": "ბათუმი",
+      "population": 155000
+    },
+    {
+      "name": "ქობულეთი",
+      "population": 27500
+    },
+    {
+      "name": "ქედა",
+      "population": 1500
+    },
+    {
+      "name": "შუახევი",
+      "population": 15000
+    },
+    {
+      "name": "ხულო",
+      "population": 23300
+    }
+  ],
+  "გურია": [
+    {
+      "name": "ლანჩხუთი",
+      "population": 6400
+    },
+    {
+      "name": "ოზურგეთი",
+      "population": 14700
+    },
+    {
+      "name": "ურეკი",
+      "population": 1200
+    },
+    {
+      "name": "ჩოხატაური",
+      "population": 1800
+    }
+  ],
+  "იმერეთი": [
+    {
+      "name": "ბაღდათი",
+      "population": 3700
+    },
+    {
+      "name": "ვანი",
+      "population": 3800
+    },
+    {
+      "name": "ზესტაფონი",
+      "population": 2100
+    },
+    {
+      "name": "თერჯოლა",
+      "population": 4600
+    },
+    {
+      "name": "სამტრედია",
+      "population": 25300
+    },
+    {
+      "name": "საჩხერე",
+      "population": 6100
+    },
+    {
+      "name": "ტყიბული",
+      "population": 9770
+    },
+    {
+      "name": "ქუთაისი",
+      "population": 147500
+    },
+    {
+      "name": "წყალტუბო",
+      "population": 11300
+    },
+    {
+      "name": "ჭიათურა",
+      "population": 12800
+    },
+    {
+      "name": "ჭორვილა",
+      "population": 1500
+    },
+    {
+      "name": "ხარაგაული",
+      "population": 2000
+    },
+    {
+      "name": "ხონი",
+      "population": 9000
+    }
+  ],
+  "კახეთი": [
+    {
+      "name": "ახმეტა",
+      "population": 6400
+    },
+    {
+      "name": "გურჯაანი",
+      "population": 8000
+    },
+    {
+      "name": "თელავი",
+      "population": 19600
+    },
+    {
+      "name": "ლაგოდეხი",
+      "population": 5900
+    },
+    {
+      "name": "საგერეჯო",
+      "population": 10900
+    },
+    {
+      "name": "სიღნაღი",
+      "population": 1500
+    },
+    {
+      "name": "ყვარელი",
+      "population": 7700
+    }
+  ],
+  "მცხეთა-მთიანეთი": [
+    {
+      "name": "ახალგორი",
+      "population": 7700
+    },
+    {
+      "name": "მცხეთა",
+      "population": 7900
+    },
+    {
+      "name": "დუშეთი",
+      "population": 6200
+    },
+    {
+      "name": "თიანეთი",
+      "population": 2500
+    },
+    {
+      "name": "ყაზბეგი",
+      "population": 1300
+    }
+  ],
+  "რაჭა-ლეჩხუმი და ქვემო სვანეთი": [
+    {
+      "name": "ამბროლაური",
+      "population": 2000
+    },
+    {
+      "name": "ლენტეხი",
+      "population": 900
+    },
+    {
+      "name": "ონი",
+      "population": 2700
+    },
+    {
+      "name": "ცაგერი",
+      "population": 1300
+    }
+  ],
+  "სამეგრელო და ზემო სვანეთი": [
+    {
+      "name": "აბაშა",
+      "population": 4900
+    },
+    {
+      "name": "ფოთი",
+      "population": 41500
+    },
+    {
+      "name": "ზუგდიდი",
+      "population": 41500
+    },
+    {
+      "name": "მარტვილი",
+      "population": 4400
+    },
+    {
+      "name": "მესტია",
+      "population": 2000
+    },
+    {
+      "name": "სენაკი",
+      "population": 21600
+    },
+    {
+      "name": "ჩხოროწყუ",
+      "population": 3100
+    },
+    {
+      "name": "წალენჯიხა",
+      "population": 3200
+    },
+    {
+      "name": "ხობი",
+      "population": 4200
+    }
+  ],
+  "სამცხე-ჯავახეთი": [
+    {
+      "name": "ადიგენი",
+      "population": 800
+    },
+    {
+      "name": "ასპინძა",
+      "population": 2800
+    },
+    {
+      "name": "ახალქალაქი",
+      "population": 8300
+    },
+    {
+      "name": "ახალციხე",
+      "population": 17900
+    },
+    {
+      "name": "ბორჯომი",
+      "population": 10500
+    },
+    {
+      "name": "ბაკურიანი",
+      "population": 1900
+    },
+    {
+      "name": "ნინოწმინდა",
+      "population": 5100
+    }
+  ],
+  "ქვემო ქართლი": [
+    {
+      "name": "ბოლნისი",
+      "population": 8400
+    },
+    {
+      "name": "გარდაბანი",
+      "population": 10800
+    },
+    {
+      "name": "დმანისი",
+      "population": 3000
+    },
+    {
+      "name": "თეთრიწყარო",
+      "population": 3100
+    },
+    {
+      "name": "მარნეული",
+      "population": 25000
+    },
+    {
+      "name": "რუსთავი",
+      "population": 132300
+    },
+    {
+      "name": "წალკა",
+      "population": 3100
+    }
+  ],
+  "შიდა ქართლი": [
+    {
+      "name": "გორი",
+      "population": 48100
+    },
+    {
+      "name": "ერედვი",
+      "population": 8300
+    },
+    {
+      "name": "თიღვი",
+      "population": 1000
+    },
+    {
+      "name": "კასპი",
+      "population": 25000
+    },
+    {
+      "name": "ქარელი",
+      "population": 6700
+    },
+    {
+      "name": "ქურთა",
+      "population": 900
+    },
+    {
+      "name": "ხაშური",
+      "population": 26100
+    }
+  ]
+}
