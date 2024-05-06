@@ -40,6 +40,24 @@
 
   onAuthStateChanged(auth, (usr) => (user = usr));
 
+  const onDelete = async (model: Daitove | Gaikole) => {
+    if (confirm('ნამდვილად გსურთ განცხადების წაშლა?')) {
+      handleDelete(model);
+    }
+  };
+
+  const handleDelete = async (model: Daitove | Gaikole) => {
+    if (model instanceof Daitove) {
+      await deleteDoc(doc(firestore, 'daitove', model.id));
+      delete daitoves[model.id];
+      daitoves = { ...daitoves };
+    } else if (model instanceof Gaikole) {
+      await deleteDoc(doc(firestore, 'gaikole', model.id));
+      delete gaikoles[model.id];
+      gaikoles = { ...gaikoles };
+    }
+  };
+
   afterNavigate(async () => {
     daitoves = {
       ...daitoves,
@@ -82,8 +100,8 @@
   }
 </script>
 
-<nav class="sticky top-0 z-10 h-16 bg-stone-100 flex justify-center items-center select-none">
-  <form class="relative w-fit h-fit pb-2">
+<nav class="sticky top-0 z-10 flex items-center justify-center h-16 select-none bg-stone-100">
+  <form class="relative pb-2 w-fit h-fit">
     <label
       for="category-damitove"
       class="
@@ -106,14 +124,14 @@
       {#if showDaitoveForm}
         <button
           on:click={() => (showDaitoveForm = false)}
-          class="absolute top-1 -left-6 w-5 h-5 text-green-800"
+          class="absolute w-5 h-5 text-green-800 top-1 -left-6"
         >
           <IconMinus />
         </button>
       {:else}
         <button
           on:click={() => (showDaitoveForm = true)}
-          class="absolute top-1 -left-6 w-5 h-5 text-green-800"
+          class="absolute w-5 h-5 text-green-800 top-1 -left-6"
         >
           <IconPlus />
         </button>
@@ -142,14 +160,14 @@
       {#if showGaikoleForm}
         <button
           on:click={() => (showGaikoleForm = false)}
-          class="absolute top-1 -right-6 w-5 h-5 text-green-800"
+          class="absolute w-5 h-5 text-green-800 top-1 -right-6"
         >
           <IconMinus />
         </button>
       {:else}
         <button
           on:click={() => (showGaikoleForm = true)}
-          class="absolute top-1 -right-6 w-5 h-5 text-green-800"
+          class="absolute w-5 h-5 text-green-800 top-1 -right-6"
         >
           <IconPlus />
         </button>
@@ -158,8 +176,8 @@
   </form>
 </nav>
 
-<ul class="mx-16 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
-  <li class="col-span-full flex justify-center">
+<ul class="grid grid-cols-1 mx-16 lg:grid-cols-2 xl:grid-cols-3">
+  <li class="flex justify-center col-span-full">
     {#if showDaitoveForm}
       <DaitoveFormShort
         on:publish={async (e) => {
@@ -191,14 +209,9 @@
           authorName={daitove.authorName}
           phoneNumber={daitove.phoneNumber}
         >
-          <!-- TODO: "are you sure?" confirmation -->
           <button
-            on:click={async () => {
-              await deleteDoc(doc(firestore, 'daitove', daitove.id));
-              delete daitoves[daitove.id];
-              daitoves = { ...daitoves };
-            }}
-            class="absolute top-2 right-0 h-5 w-5 text-red-800"
+            on:click={() => onDelete(daitove)}
+            class="absolute right-0 w-5 h-5 text-red-800 top-2"
           >
             <IconTrash />
           </button>
@@ -217,14 +230,9 @@
           authorName={gaikole.authorName}
           phoneNumber={gaikole.phoneNumber}
         >
-          <!-- TODO: "are you sure?" confirmation -->
-          <button
-            on:click={async () => {
-              await deleteDoc(doc(firestore, 'gaikole', gaikole.id));
-              delete gaikoles[gaikole.id];
-              gaikoles = { ...gaikoles };
-            }}
-            class="absolute top-2 right-0 h-5 w-5 text-red-800"
+          3 <button
+            on:click={() => onDelete(gaikole)}
+            class="absolute right-0 w-5 h-5 text-red-800 top-2"
           >
             <IconTrash />
           </button>
