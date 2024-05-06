@@ -1,5 +1,5 @@
-<script lang="ts">
-  import { getMonth } from '$lib/datetime';
+<!-- <script lang="ts">
+  import months from '$lib/months.json';
   import { formatPhoneNumber } from '$lib/formatting';
 
   const departurePoint: string = $$props.departurePoint;
@@ -32,7 +32,7 @@
         <th>გამგზავრება:</th>
         <td>
           {departureTime.getDate()}
-          {getMonth(departureTime)},
+          {months[departureTime.getMonth()]},
           {timeFormatter.format(departureTime)}
         </td>
       </tr>
@@ -40,7 +40,7 @@
         <th>ჩასვლა:</th>
         <td>
           {arrivalTime.getDate()}
-          {getMonth(arrivalTime)},
+          {months[arrivalTime.getMonth()]},
           {timeFormatter.format(departureTime)}
         </td>
       </tr>
@@ -54,4 +54,4 @@
       </tr>
     </tbody>
   </table>
-</section>
+</section> -->

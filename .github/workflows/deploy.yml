@@ -8,7 +8,10 @@ on:
     tags:
       - v*
     paths-ignore:
-      - 'README.md'
+      - .gitignore
+      - CONTRIBUTING.md
+      - README.md
+      - TODO
 
 jobs:
   build:
@@ -22,10 +25,21 @@ jobs:
       pages: write
       id-token: write
 
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    environment: prod
 
     steps:
+      - name: Checkout # for firebase.json
+        uses: actions/checkout@v4
+
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: build
+
       - name: Deploy
-        uses: actions/deploy-pages@v4
+        uses: w9jds/firebase-action@v13.8.0
+        with:
+          args: deploy
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}

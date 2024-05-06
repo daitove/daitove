@@ -1,5 +1,5 @@
-<script lang="ts">
-  import DaitoveCard from '$lib/components/DaitoveCard.svelte';
+<!-- <script lang="ts">
+  import DaitoveCard from '$lib/components/cards/DaitoveCard.svelte';
 
   const cardsData = Array.from({ length: 100 }, (_, index) => ({
     numberOfPeople: index + 1,
@@ -13,5 +13,4 @@
   {#each cardsData as cardData}
     <DaitoveCard numberOfPeople={cardData.numberOfPeople} duration={cardData.duration} />
   {/each}
-  >
-</section>
+</section> -->
