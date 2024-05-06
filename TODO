@@ -16,5 +16,5 @@
   - [ ] _if the phone number is not already registered prompt user for their name_
   - [ ] enter the name
   - [ ] click "გაგრძელება"
-  - _[ ] redirect to the newly created profile_
+  - [ ] _redirect to the newly created profile_
 - [ ] Move to Firebase hosting
