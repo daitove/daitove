@@ -230,7 +230,7 @@
           authorName={gaikole.authorName}
           phoneNumber={gaikole.phoneNumber}
         >
-          3 <button
+          <button
             on:click={() => onDelete(gaikole)}
             class="absolute right-0 w-5 h-5 text-red-800 top-2"
           >
