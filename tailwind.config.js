@@ -3,10 +3,8 @@ export default {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   theme: {
     extend: {
-        //
+      //
     }
   },
-  plugins: [
-    require('@midudev/tailwind-animations')
-  ]
+  plugins: [require('@midudev/tailwind-animations')]
 };
