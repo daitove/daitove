@@ -17,18 +17,12 @@
   onAuthStateChanged(auth, (usr) => (user = usr));
 </script>
 
-<header class="relative h-16">
-  <a href="/preview" class="absolute left-5 top-2 w-12 h-12">
+<header class="flex items-center justify-between px-4 py-2">
+  <a href="/preview" class="w-12 h-12">
     <Logo />
   </a>
 
-  <a
-    href="/preview"
-    style="left: calc(50% - 4.5rem);"
-    class="absolute top-5 w-36 text-center italic text-gray-700"
-  >
-    შინ, ევროპისკენ!
-  </a>
+  <a href="/preview" class="italic text-center text-gray-700 w-36">შინ, ევროპისკენ!</a>
 
   <a
     href="/profiles/{user?.uid}"
@@ -42,7 +36,7 @@
         goto('/preview');
       }
     }}
-    class="absolute top-4 right-4 h-8 w-8 text-gray-700"
+    class="w-8 h-8 text-gray-700 fx-click group"
   >
     {#if user && $page.url.pathname === `/profiles/${user.uid}`}
       <IconSignOut />
@@ -55,7 +49,7 @@
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div
-      class="fixed z-40 top-0 left-0 h-screen w-screen flex justify-center items-center bg-black bg-opacity-25"
+      class="fixed top-0 left-0 z-40 flex items-center justify-center w-screen h-screen bg-black bg-opacity-25"
       on:click={(e) => {
         showSignInForm = false;
         e.stopPropagation();

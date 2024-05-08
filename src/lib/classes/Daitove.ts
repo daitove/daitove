@@ -10,6 +10,7 @@ export default class Daitove {
   public authorUid: string;
   public authorName: string;
   public phoneNumber: string;
+  public createdAt: Date;
 
   constructor(
     id: string,
@@ -20,7 +21,8 @@ export default class Daitove {
     foodIncluded: boolean,
     authorUid: string,
     authorName: string,
-    phoneNumber: string
+    phoneNumber: string,
+    createdAt: Date
   ) {
     this.id = id;
     this.numberOfPeople = numberOfPeople;
@@ -31,6 +33,7 @@ export default class Daitove {
     this.authorUid = authorUid;
     this.authorName = authorName;
     this.phoneNumber = phoneNumber;
+    this.createdAt = createdAt;
   }
 
   public static fromDoc(doc: DocumentSnapshot) {
@@ -44,7 +47,8 @@ export default class Daitove {
       data!.foodIncluded as boolean,
       data!.authorUid as string,
       data!.authorName as string,
-      data!.phoneNumber as string
+      data!.phoneNumber as string,
+      data!.createdAt.toDate() as Date
     );
   }
 }

@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .fx-click {
+        @apply transition duration-300 transform hover:scale-105 active:scale-95;
+    }
+
+    .fx-click-sm {
+        @apply transition duration-300 transform hover:scale-[1.02] active:scale-[.98];
+    }
+
+    .fx-rotate {
+        @apply transition duration-300 transform hover:rotate-180 active:scale-95;
+    }
+}

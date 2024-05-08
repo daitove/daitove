@@ -8,6 +8,7 @@ export default class Gaikole {
   public authorUid: string;
   public authorName: string;
   public phoneNumber: string;
+  public createdAt: Date;
 
   constructor(
     id: string,
@@ -16,7 +17,8 @@ export default class Gaikole {
     departureTime: Date,
     authorUid: string,
     authorName: string,
-    phoneNumber: string
+    phoneNumber: string,
+    createdAt: Date
   ) {
     this.id = id;
     this.departurePoint = departurePoint;
@@ -25,6 +27,7 @@ export default class Gaikole {
     this.authorUid = authorUid;
     this.authorName = authorName;
     this.phoneNumber = phoneNumber;
+    this.createdAt = createdAt;
   }
 
   public static fromDoc(doc: DocumentSnapshot): Gaikole {
@@ -36,7 +39,8 @@ export default class Gaikole {
       data!.departureTime.toDate() as Date,
       data!.authorUid as string,
       data!.authorName as string,
-      data!.phoneNumber as string
+      data!.phoneNumber as string,
+      data!.createdAt.toDate() as Date
     );
   }
 }

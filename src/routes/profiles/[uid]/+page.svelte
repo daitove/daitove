@@ -32,10 +32,10 @@
   $: showDaitoveForm = showDaitoveForm && category === 'daitove' && data.uid === user?.uid;
   $: showGaikoleForm = showGaikoleForm && category === 'gaikole' && data.uid === user?.uid;
   $: sortedDaitoves = Object.values(daitoves).sort(
-    (a, b) => a.fromDate.getTime() - b.fromDate.getTime()
+    (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
   );
   $: sortedGaikoles = Object.values(gaikoles).sort(
-    (a, b) => a.departureTime.getTime() - b.departureTime.getTime()
+    (a, b) => b.createdAt?.getTime() - a.createdAt?.getTime()
   );
 
   onAuthStateChanged(auth, (usr) => (user = usr));
@@ -124,14 +124,14 @@
       {#if showDaitoveForm}
         <button
           on:click={() => (showDaitoveForm = false)}
-          class="absolute w-5 h-5 text-green-800 top-1 -left-6"
+          class="absolute w-5 h-5 text-green-800 top-1 -left-6 fx-rotate"
         >
           <IconMinus />
         </button>
       {:else}
         <button
           on:click={() => (showDaitoveForm = true)}
-          class="absolute w-5 h-5 text-green-800 top-1 -left-6"
+          class="absolute w-5 h-5 text-green-800 top-1 -left-6 fx-rotate"
         >
           <IconPlus />
         </button>
@@ -160,14 +160,14 @@
       {#if showGaikoleForm}
         <button
           on:click={() => (showGaikoleForm = false)}
-          class="absolute w-5 h-5 text-green-800 top-1 -right-6"
+          class="absolute w-5 h-5 text-green-800 top-1 -right-6 fx-rotate"
         >
           <IconMinus />
         </button>
       {:else}
         <button
           on:click={() => (showGaikoleForm = true)}
-          class="absolute w-5 h-5 text-green-800 top-1 -right-6"
+          class="absolute w-5 h-5 text-green-800 top-1 -right-6 fx-rotate"
         >
           <IconPlus />
         </button>
@@ -197,9 +197,10 @@
     {/if}
   </li>
   {#if category === 'daitove'}
-    {#each sortedDaitoves as daitove (daitove.id)}
+    {#each sortedDaitoves as daitove, i (daitove.id)}
       <li class="flex justify-center">
         <DaitoveCardShort
+          index={i}
           id={daitove.id}
           district={daitove.district}
           numberOfPeople={daitove.numberOfPeople}
@@ -211,7 +212,7 @@
         >
           <button
             on:click={() => onDelete(daitove)}
-            class="absolute right-0 w-5 h-5 text-red-800 top-2"
+            class="absolute right-0 w-5 h-5 text-red-800 top-2 fx-click"
           >
             <IconTrash />
           </button>
@@ -219,9 +220,10 @@
       </li>
     {/each}
   {:else if category === 'gaikole'}
-    {#each sortedGaikoles as gaikole (gaikole.id)}
+    {#each sortedGaikoles as gaikole, i (gaikole.id)}
       <li class="flex justify-center">
         <GaikoleCardShort
+          index={i}
           id={gaikole.id}
           departurePoint={gaikole.departurePoint}
           numberOfPeople={gaikole.numberOfPeople}
@@ -232,7 +234,7 @@
         >
           <button
             on:click={() => onDelete(gaikole)}
-            class="absolute right-0 w-5 h-5 text-red-800 top-2"
+            class="absolute right-0 w-5 h-5 text-red-800 top-2 fx-click"
           >
             <IconTrash />
           </button>

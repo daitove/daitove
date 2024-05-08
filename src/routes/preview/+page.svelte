@@ -54,8 +54,8 @@
   }
 </script>
 
-<nav class="sticky top-0 z-10 h-16 bg-stone-100 flex justify-center items-center select-none">
-  <form class="w-fit h-fit pb-2">
+<nav class="sticky top-0 z-10 flex items-center justify-center h-16 select-none bg-stone-100">
+  <form class="pb-2 w-fit h-fit">
     <label
       for="category-damitove"
       class="
@@ -96,11 +96,12 @@
   </form>
 </nav>
 
-<ul class="mx-16 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+<ul class="grid grid-cols-1 mx-16 lg:grid-cols-2 xl:grid-cols-3">
   {#if category === 'დამიტოვე'}
-    {#each sortedDaitoves as daitove}
+    {#each sortedDaitoves as daitove, i (daitove.id)}
       <li class="flex justify-center">
         <DaitoveCardShort
+          index={i}
           id={daitove.id}
           district={daitove.district}
           numberOfPeople={daitove.numberOfPeople}
@@ -114,9 +115,10 @@
       </li>
     {/each}
   {:else if category === 'გამიყოლე'}
-    {#each sortedGaikoles as gaikole}
+    {#each sortedGaikoles as gaikole, i (gaikole.id)}
       <li class="flex justify-center">
         <GaikoleCardShort
+          index={i}
           id={gaikole.id}
           departurePoint={gaikole.departurePoint}
           numberOfPeople={gaikole.numberOfPeople}
