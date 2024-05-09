@@ -1,12 +1,12 @@
 - [x] Add confirmations for destructive actions
 - [ ] Add validation to confirmation code
 - [ ] Reduce code duplication
-- [ ] Animate action buttons
-- [ ] Animate mounting of components
+- [x] Animate action buttons
+- [x] Animate mounting of components
 - [ ] Optimize data fetching
 - [ ] Optimize data storage on client
 - [ ] Allow editing of published offers
-- [ ] Fix font on the logo
+- [x] Fix font on the logo
 - [x] Replace sign up flow with the following:
   - [x] input phone number
   - [x] click "კოდის გაგზავნა"

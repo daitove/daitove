@@ -38,17 +38,9 @@ export default class GaikoleFetcher {
     this.lastFetchedDoc = snapshot.docs[snapshot.docs.length - 1];
 
     const gaikoles: { [key: string]: Gaikole } = {};
+
     snapshot.forEach((doc) => {
-      const data = doc.data();
-      gaikoles[doc.id] = new Gaikole(
-        doc.id,
-        data.departurePoint as string,
-        data.numberOfPeople as number,
-        data.departureTime.toDate() as Date,
-        data.authorUid as string,
-        data.authorName as string,
-        data.phoneNumber as string
-      );
+      gaikoles[doc.id] = Gaikole.fromDoc(doc);
     });
 
     return gaikoles;

@@ -11,7 +11,7 @@
   import IconPhone from '$lib/components/icons/IconPhone.svelte';
   import IconUser from '$lib/components/icons/IconUser.svelte';
   import { bestMatchFactory } from '$lib/sorting';
-  import IconUpload from '../icons/IconUpload.svelte';
+  import IconSend from '$lib/components/icons/IconSend.svelte';
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -41,14 +41,13 @@
       district: district,
       numberOfPeople: parseInt(numberOfPeople),
       fromDate: Timestamp.fromDate(fromDate_),
-      tillDate: Timestamp.fromDate(tillDate)
+      tillDate: Timestamp.fromDate(tillDate),
+      createdAt: Timestamp.now()
     });
 
     district = '';
     numberOfPeople = '';
     duration = '';
-    fromDate = '';
-    fromMonth = '';
 
     dispatch('publish', { docId: doc.id, docPath: doc.path });
   }
@@ -90,7 +89,7 @@
   const getDayCount = (month: number) => new Date(today.getFullYear(), month + 1, 0).getDate();
 </script>
 
-<form class="relative h-36 min-w-96 m-4 text-gray-700">
+<form class="relative z-10 m-4 text-gray-700 h-36 min-w-96 animate-fade-in-down">
   <div class="absolute top-0 left-0 h-36 w-36">
     <DistrictMap {district} />
   </div>
@@ -106,17 +105,10 @@
     }}
     on:input={onDistrictInput}
     bind:value={district}
-    class="
-      absolute left-36 top-2 w-32 h-6
-      border-b border-gray-700
-      text-base font-medium
-      bg-inherit
-      outline-none appearance-none overflow-hidden
-      focus:bg-inherit
-    "
+    class="absolute w-32 h-6 overflow-hidden text-base font-medium border-b border-gray-700 outline-none appearance-none left-36 top-2 bg-inherit focus:bg-inherit"
   />
   {#if districtInputFocused}
-    <ul class="absolute left-36 top-8 z-10 w-32 bg-stone-200">
+    <ul class="absolute z-10 w-32 left-36 top-8 bg-stone-200">
       {#each sortedDistricts as dst}
         <li>
           <button
@@ -129,7 +121,7 @@
       {/each}
     </ul>
   {/if}
-  <p class="absolute left-36 top-10 text-sm">
+  <p class="absolute text-sm left-36 top-10">
     დავიტოვებ
     <input
       inputmode="numeric"
@@ -139,7 +131,7 @@
       maxlength="2"
       on:input={filterNumericInput}
       bind:value={numberOfPeople}
-      class="w-4 bg-inherit text-right outline-none border-b border-gray-700 focus:bg-inherit"
+      class="w-4 text-right border-b border-gray-700 outline-none bg-inherit focus:bg-inherit"
     />
     ადამიანს
     <input
@@ -150,7 +142,7 @@
       maxlength="2"
       on:input={filterNumericInput}
       bind:value={duration}
-      class="w-4 bg-inherit text-right outline-none border-b border-gray-700 focus:bg-inherit"
+      class="w-4 text-right border-b border-gray-700 outline-none bg-inherit focus:bg-inherit"
     />
     დღით
     <br />
@@ -163,7 +155,7 @@
       on:mousedown={() => (fromDate = '')}
       on:input={filterNumericInput}
       bind:value={fromDate}
-      class="absolute top-5 w-4 h-5 bg-inherit outline-none border-b border-gray-700 focus:bg-inherit"
+      class="absolute w-4 h-5 border-b border-gray-700 outline-none top-5 bg-inherit focus:bg-inherit"
     />
     <input
       type="text"
@@ -177,10 +169,10 @@
       }}
       on:input={onMonthsInput}
       bind:value={fromMonth}
-      class="absolute left-5 top-5 w-28 h-5 bg-inherit outline-none border-b border-gray-700 focus:bg-inherit"
+      class="absolute h-5 border-b border-gray-700 outline-none left-5 top-5 w-28 bg-inherit focus:bg-inherit"
     />
     {#if fromMonthInputFocused}
-      <ul class="absolute left-5 top-10 z-10 w-28 bg-stone-200">
+      <ul class="absolute z-10 left-5 top-10 w-28 bg-stone-200">
         {#each sortedMonths as month}
           <li>
             <button
@@ -195,15 +187,15 @@
     {/if}
   </p>
   {#if isDaitoveValid}
-    <button on:click={publish} class="absolute top-2 right-0 h-6 w-6 text-green-800">
-      <IconUpload />
+    <button on:click={publish} class="absolute right-0 w-6 h-6 text-green-800 top-2 fx-click">
+      <IconSend />
     </button>
   {:else}
-    <div class="absolute top-2 right-0 h-6 w-6 text-red-800">
-      <IconUpload />
+    <div class="absolute right-0 w-6 h-6 text-red-800 top-2">
+      <IconSend />
     </div>
   {/if}
-  <a href="/profiles/{authorUid}" class="absolute left-36 top-[5.5rem] text-sm">
+  <a href="/profiles/{authorUid}" class="absolute left-36 top-[5.5rem] text-sm fx-click group">
     <div class="inline-block h-4 w-4 translate-y-[0.2rem] text-gray-800">
       <IconUser />
     </div>
@@ -211,9 +203,12 @@
       {authorName}
     </div>
   </a>
-  <a href="tel:{phoneNumber}" class="absolute right-0 top-[5.5rem] flex text-sm text-green-800">
-    <div class="inline-block px-1 border-green-800 border rounded-tl-lg rounded-bl-lg">
-      <div class="inline-block h-3 w-3">
+  <a
+    href="tel:{phoneNumber}"
+    class="absolute right-0 top-[5.5rem] flex text-sm text-green-800 fx-click"
+  >
+    <div class="inline-block px-1 border border-green-800 rounded-tl-lg rounded-bl-lg">
+      <div class="inline-block w-3 h-3">
         <IconPhone />
       </div>
     </div>

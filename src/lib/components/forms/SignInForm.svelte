@@ -77,7 +77,7 @@
 
     <button
       on:click={setDisplayName}
-      class="absolute top-[6.5rem] left-16 h-12 w-64 rounded-lg bg-blue-600 text-lg font-medium text-stone-100"
+      class="absolute top-[6.5rem] left-16 h-12 w-64 rounded-lg bg-blue-600 text-lg font-medium text-stone-100 fx-click-sm"
     >
       შენახვა
     </button>
@@ -97,7 +97,7 @@
     {#if confirmationResult === undefined}
       <button
         on:click={sendVerificationCode}
-        class="absolute top-[6.5rem] left-16 h-12 w-64 rounded-lg bg-blue-600 text-lg font-medium text-stone-100"
+        class="absolute top-[6.5rem] left-16 h-12 w-64 rounded-lg bg-blue-600 text-lg font-medium text-stone-100 fx-click-sm"
       >
         კოდის გაგზავნა
       </button>
@@ -115,7 +115,7 @@
 
       <button
         on:click={confirmVerificationCode}
-        class="absolute top-[6.5rem] left-16 h-12 w-64 rounded-lg bg-blue-600 text-lg font-medium text-stone-100"
+        class="absolute top-[6.5rem] left-16 h-12 w-64 rounded-lg bg-blue-600 text-lg font-medium text-stone-100 fx-click-sm"
       >
         შესვლა
       </button>
