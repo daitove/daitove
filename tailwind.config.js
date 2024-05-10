@@ -9,8 +9,5 @@ export default {
       //
     }
   },
-  plugins: [
-    animations, 
-    forms({ strategy: 'class' })
-  ]
+  plugins: [animations, forms({ strategy: 'class' })]
 };
