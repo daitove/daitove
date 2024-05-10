@@ -48,7 +48,7 @@ export default class Daitove {
       data!.authorUid as string,
       data!.authorName as string,
       data!.phoneNumber as string,
-      data!.createdAt.toDate() as Date
+      data!.createdAt?.toDate() as Date
     );
   }
 }

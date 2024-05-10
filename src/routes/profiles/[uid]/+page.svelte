@@ -32,7 +32,7 @@
   $: showDaitoveForm = showDaitoveForm && category === 'daitove' && data.uid === user?.uid;
   $: showGaikoleForm = showGaikoleForm && category === 'gaikole' && data.uid === user?.uid;
   $: sortedDaitoves = Object.values(daitoves).sort(
-    (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+    (a, b) => b.createdAt?.getTime() - a.createdAt?.getTime()
   );
   $: sortedGaikoles = Object.values(gaikoles).sort(
     (a, b) => b.createdAt?.getTime() - a.createdAt?.getTime()
@@ -196,6 +196,7 @@
       />
     {/if}
   </li>
+
   {#if category === 'daitove'}
     {#each sortedDaitoves as daitove, i (daitove.id)}
       <li class="flex justify-center">
