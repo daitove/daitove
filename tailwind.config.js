@@ -1,3 +1,6 @@
+import animations from '@midudev/tailwind-animations';
+import forms from '@tailwindcss/forms';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{html,js,svelte,ts}'],
@@ -6,5 +9,8 @@ export default {
       //
     }
   },
-  plugins: [require('@midudev/tailwind-animations')]
+  plugins: [
+    animations, 
+    forms({ strategy: 'class' })
+  ]
 };

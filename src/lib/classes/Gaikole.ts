@@ -40,7 +40,7 @@ export default class Gaikole {
       data!.authorUid as string,
       data!.authorName as string,
       data!.phoneNumber as string,
-      data!.createdAt.toDate() as Date
+      data!.createdAt?.toDate() as Date
     );
   }
 }

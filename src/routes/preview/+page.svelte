@@ -11,18 +11,96 @@
   import { afterNavigate } from '$app/navigation';
   import DaitoveFetcher from '$lib/classes/DaitoveFetcher';
   import GaikoleFetcher from '$lib/classes/GaikoleFetcher';
+  import districts from '$lib/districts.json';
+  import settlements from '$lib/settlements.json';
 
   let category: 'დამიტოვე' | 'გამიყოლე' = 'დამიტოვე';
   let daitoves: { [key: string]: Daitove } = {};
   let daitoveFetcher = new DaitoveFetcher();
   let gaikoles: { [key: string]: Gaikole } = {};
   let gaikoleFetcher = new GaikoleFetcher();
-  $: sortedDaitoves = Object.values(daitoves).sort(
-    (a, b) => a.fromDate.getTime() - b.fromDate.getTime()
-  );
-  $: sortedGaikoles = Object.values(gaikoles).sort(
-    (a, b) => a.departureTime.getTime() - b.departureTime.getTime()
-  );
+  let sortedDaitoves: Daitove[] = [];
+  let sortedGaikoles: Gaikole[] = [];
+
+  let sortedDistricts = Array.from(districts);
+  let sortedSettlements = Object.values(settlements)
+    .flat()
+    .sort((a, b) => b.population - a.population)
+    .map((el) => el.name);
+
+  let datePicker: HTMLInputElement | null = null;
+
+  let daitoveFilters: {
+    district: string | null;
+    numberOfPeople: number | null;
+    fromDate: string | null;
+  } = {
+    district: null,
+    numberOfPeople: null,
+    fromDate: null
+  };
+
+  let gaikoleFilters: {
+    departurePoint: string | null;
+    numberOfPeople: number | null;
+    departureTime: string | null;
+  } = {
+    departurePoint: null,
+    numberOfPeople: null,
+    departureTime: null
+  };
+
+  $: {
+    sortedDaitoves = Object.values(daitoves).sort(
+      (a, b) => a.fromDate.getTime() - b.fromDate.getTime()
+    );
+
+    if (daitoveFilters.district) {
+      sortedDaitoves = sortedDaitoves.filter(
+        (daitove) => daitove.district === daitoveFilters.district
+      );
+    }
+
+    if (daitoveFilters.numberOfPeople) {
+      sortedDaitoves = sortedDaitoves.filter(
+        (daitove) => daitove.numberOfPeople >= Number(daitoveFilters.numberOfPeople)
+      );
+    }
+
+    if (daitoveFilters.fromDate) {
+      const fromDate = new Date(daitoveFilters.fromDate);
+      fromDate.setHours(0, 0, 0, 0);
+
+      sortedDaitoves = sortedDaitoves.filter(
+        (daitove) => daitove.fromDate.getTime() >= fromDate.getTime()
+      );
+    }
+  }
+  $: {
+    sortedGaikoles = Object.values(gaikoles).sort(
+      (a, b) => a.departureTime.getTime() - b.departureTime.getTime()
+    );
+
+    if (gaikoleFilters.departurePoint) {
+      sortedGaikoles = sortedGaikoles.filter(
+        (gaikole) => gaikole.departurePoint === gaikoleFilters.departurePoint
+      );
+    }
+
+    if (gaikoleFilters.numberOfPeople) {
+      sortedGaikoles = sortedGaikoles.filter(
+        (gaikole) => gaikole.numberOfPeople >= Number(gaikoleFilters.numberOfPeople)
+      );
+    }
+
+    if (gaikoleFilters.departureTime) {
+      const fromDate = new Date(gaikoleFilters.departureTime);
+
+      sortedGaikoles = sortedGaikoles.filter(
+        (gaikole) => fromDate.toDateString() === gaikole.departureTime.toDateString()
+      );
+    }
+  }
 
   afterNavigate(async () => {
     daitoves = { ...daitoves, ...(await daitoveFetcher.fetch(firestore, 72)) };
@@ -95,6 +173,96 @@
     />
   </form>
 </nav>
+
+<div class="flex items-center justify-center mx-4 space-x-2">
+  {#if category === 'დამიტოვე'}
+    <div>
+      <select
+        class="block form-select rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+        bind:value={daitoveFilters.district}
+      >
+        <option value={null}>აირჩიე უბანი</option>
+        {#each sortedDistricts as district}
+          <option>{district}</option>
+        {/each}
+      </select>
+    </div>
+
+    <div>
+      <input
+        class="block form-input rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+        type="number"
+        bind:value={daitoveFilters.numberOfPeople}
+        placeholder="რამდენი ადამიანი?"
+        min="1"
+      />
+    </div>
+
+    <div>
+      <input
+        class="block form-input rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 w-44"
+        type="text"
+        bind:this={datePicker}
+        min={new Date().toLocaleDateString('en-CA')}
+        bind:value={daitoveFilters.fromDate}
+        placeholder="როდიდან?"
+        on:focus={() => {
+          if (datePicker) {
+            datePicker.type = 'date';
+          }
+        }}
+        on:blur={() => {
+          if (datePicker && !daitoveFilters.fromDate) {
+            datePicker.type = 'text';
+          }
+        }}
+      />
+    </div>
+  {:else if category === 'გამიყოლე'}
+    <div>
+      <select
+        class="block form-select rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+        bind:value={gaikoleFilters.departurePoint}
+      >
+        <option value={null}>აირჩიე ქალაქი</option>
+        {#each sortedSettlements as settlement}
+          <option>{settlement}</option>
+        {/each}
+      </select>
+    </div>
+
+    <div>
+      <input
+        class="block form-input rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+        type="number"
+        bind:value={gaikoleFilters.numberOfPeople}
+        placeholder="რამდენი ადამიანი?"
+        min="1"
+      />
+    </div>
+
+    <div>
+      <input
+        class="block form-input rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 w-44"
+        type="text"
+        bind:this={datePicker}
+        min={new Date().toLocaleDateString('en-CA')}
+        bind:value={gaikoleFilters.departureTime}
+        placeholder="როდიდან?"
+        on:focus={() => {
+          if (datePicker) {
+            datePicker.type = 'date';
+          }
+        }}
+        on:blur={() => {
+          if (datePicker && !gaikoleFilters.departureTime) {
+            datePicker.type = 'text';
+          }
+        }}
+      />
+    </div>
+  {/if}
+</div>
 
 <ul class="grid grid-cols-1 mx-16 lg:grid-cols-2 xl:grid-cols-3">
   {#if category === 'დამიტოვე'}
